@@ -1,0 +1,95 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <time.h>
+
+#define MAX_GUESSES 10
+
+#define MIN_NUMBER 1
+
+#define MAX_NUMBER 100
+
+void casinoNumberGuessingGame();
+
+int main() {
+
+ casinoNumberGuessingGame();
+
+ return 0;
+
+}
+
+void casinoNumberGuessingGame() {
+
+ int secretNumber, guess, guessCount = 0;
+
+ char playAgain;
+
+ 
+
+ // Initialize random number generator
+
+ srand(time(NULL));
+
+ do {
+
+ // Generate a random number between MIN_NUMBER and MAX_NUMBER
+
+ secretNumber = rand() % (MAX_NUMBER - MIN_NUMBER + 1) + 
+
+MIN_NUMBER;
+guessCount = 0;
+
+ printf("Welcome to the Casino Number Guessing Game!\n");
+
+ printf("I have selected a number between %d and %d. Can you guess what it is?\n", 
+
+MIN_NUMBER, MAX_NUMBER);
+
+ while (guessCount < MAX_GUESSES) {
+
+ printf("Enter your guess (%d guesses remaining): ", MAX_GUESSES -
+
+guessCount);
+
+ scanf("%d", &guess);
+
+ guessCount++;
+
+ if (guess < secretNumber) {
+
+ printf("Too low!\n");
+
+ } else if (guess > secretNumber) {
+
+ printf("Too high!\n");
+
+ } else {
+
+ printf("Congratulations! You guessed the number in %d attempts!\n", 
+
+guessCount);
+
+ break;
+
+ }
+
+ }
+
+ if (guessCount == MAX_GUESSES && guess != secretNumber) {
+
+ printf("Sorry, you've used all your guesses. The number was %d.\n", 
+
+secretNumber);
+
+ }
+
+ printf("Do you want to play again? (y/n): ");
+
+ scanf(" %c", &playAgain);
+ } while (playAgain == 'y' || playAgain == 'Y');
+
+ printf("Thank you for playing! Goodbye.\n");
+
+}
